@@ -184,10 +184,12 @@ def main():
         std = dict()
         best_features = None
         
+        '''this is to parallelize'''
         all_scores = Parallel(n_jobs=cpu_count())(
             delayed(run_model)(feature_number, steps, params, choice, x_train, x_valid, x_test, y_train, y_valid, y_test, group_train, group_valid, group_test)
             for i in range(repeat_num))
         
+        '''this is without parallelization'''
         # all_scores = [run_model(feature_number, steps, params, choice, x_train, x_valid, x_test, y_train, y_valid, y_test, group_train, group_valid, group_test) for i in range(repeat_num)]
         
         # for i in range(repeat_num):
